@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dione Raze Oro - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1433 50%, #0d1b2a 100%);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 20px;
+            margin-bottom: 60px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 4px solid rgba(99, 102, 241, 0.5);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 50px rgba(168, 85, 247, 0.4);
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .photo-upload-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 4px dashed rgba(99, 102, 241, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            background: rgba(30, 35, 55, 0.3);
+        }
+
+        .photo-upload-container:hover {
+            border-color: rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.6);
+        }
+
+        .upload-text {
+            text-align: center;
+            color: #6366f1;
+            font-size: 0.9em;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5)); }
+            50% { filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background: rgba(20, 25, 45, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        .section:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 8px 32px rgba(99, 102, 241, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #6366f1;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            line-height: 1.8;
+            color: #c0c0c0;
+        }
+
+        .project-card {
+            background: rgba(30, 35, 55, 0.6);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #a855f7;
+            box-shadow: 0 5px 20px rgba(168, 85, 247, 0.3);
+            transform: translateX(10px);
+        }
+
+        .project-title {
+            font-size: 1.5em;
+            color: #a855f7;
+            margin-bottom: 15px;
+        }
+
+        .code-snippet {
+            background: rgba(10, 14, 30, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #6366f1;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #6366f1;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: rgba(30, 35, 55, 0.6);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #ec4899;
+            box-shadow: 0 5px 20px rgba(236, 72, 153, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .card-title {
+            font-size: 1.2em;
+            color: #ec4899;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #808080;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <div class="photo-upload-container" id="photoContainer" onclick="document.getElementById('photoInput').click()">
+                <div class="upload-text">
+                    <p>📷</p>
+                    <p>Click to upload photo</p>
+                </div>
+            </div>
+            <input type="file" id="photoInput" accept="image/*">
+            <h1>DIONE RAZE ORO</h1>
+            <p class="subtitle">BACHELOR OF SCIENCE IN COMPUTER SCIENCE</p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">Introduction</h2>
+            <div class="section-content">
+                <p>Welcome to my digital portfolio. I am Dione Raze Oro, a dedicated Computer Science student with a passion for creating innovative software solutions and pushing the boundaries of technology. My journey in computer science has equipped me with strong analytical skills, problem-solving abilities, and a deep understanding of programming principles.</p>
+                <p style="margin-top: 15px;">Throughout my academic career, I have developed proficiency in multiple programming languages and frameworks, with a particular focus on C++ development, algorithm design, and software engineering best practices.</p>
+                <div style="margin-top: 20px;">
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Data Structures</span>
+                    <span class="tech-tag">Algorithms</span>
+                    <span class="tech-tag">OOP</span>
+                    <span class="tech-tag">Software Engineering</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="section-content">
+                <div class="project-card">
+                    <h3 class="project-title">Featured Project: Student Management System</h3>
+                    <p>A comprehensive C++ application designed to manage student records efficiently. The system features CRUD operations, data validation, and an intuitive command-line interface.</p>
+                    <p style="margin-top: 15px;"><strong>Key Features:</strong></p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>Add, edit, and delete student records</li>
+                        <li>Search and filter functionality</li>
+                        <li>Grade calculation and GPA tracking</li>
+                        <li>File-based data persistence</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Data Structure Visualizer</h3>
+                    <p>An educational tool that visualizes common data structures including linked lists, binary trees, and graphs. Helps students understand complex concepts through interactive demonstrations.</p>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Algorithm Performance Analyzer</h3>
+                    <p>A benchmarking application that compares the performance of various sorting and searching algorithms, providing detailed time complexity analysis and visual comparisons.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">C++ Logic and Implementation</h2>
+            <div class="section-content">
+                <p>My approach to C++ development emphasizes clean code, efficiency, and adherence to modern C++ standards. Below are examples of my implementation strategies:</p>
+                
+                <div class="code-snippet">
+                    <pre>// Student Class Implementation
+class Student {
+private:
+    int id;
+    string name;
+    vector<double> grades;
+    
+public:
+    Student(int i, string n) : id(i), name(n) {}
+    
+    void addGrade(double g) {
+        grades.push_back(g);
+    }
+    
+    double calculateGPA() {
+        if (grades.empty()) return 0.0;
+        double sum = 0;
+        for (double g : grades) sum += g;
+        return sum / grades.size();
+    }
+    
+    void display() {
+        cout << "ID: " << id << " | Name: " << name 
+             << " | GPA: " << calculateGPA() << endl;
+    }
+};</pre>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">Object-Oriented Design</h3>
+                        <p>Leveraging encapsulation, inheritance, and polymorphism to create maintainable and scalable code architectures.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">STL Mastery</h3>
+                        <p>Proficient use of Standard Template Library containers, iterators, and algorithms for efficient data manipulation.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Memory Management</h3>
+                        <p>Expert handling of dynamic memory allocation using smart pointers and RAII principles to prevent memory leaks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">User Interface Design</h2>
+            <div class="section-content">
+                <p>While primarily focused on backend development, I understand the importance of intuitive user interfaces. My CLI applications feature:</p>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h3 class="card-title">Intuitive Navigation</h3>
+                        <p>Clear menu structures with numbered options and easy-to-understand prompts that guide users through application features.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Input Validation</h3>
+                        <p>Robust error handling and input validation to prevent crashes and provide meaningful feedback to users.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Visual Feedback</h3>
+                        <p>Status messages, loading indicators, and formatted output tables that enhance user experience and clarity.</p>
+                    </div>
+                </div>
+
+                <div class="code-snippet" style="margin-top: 30px;">
+                    <pre>// Menu System Example
+void displayMenu() {
+    cout << "\n╔════════════════════════════════╗\n";
+    cout << "║   STUDENT MANAGEMENT SYSTEM    ║\n";
+    cout << "╚════════════════════════════════╝\n";
+    cout << "  1. Add New Student\n";
+    cout << "  2. View All Students\n";
+    cout << "  3. Search Student\n";
+    cout << "  4. Update Student Info\n";
+    cout << "  5. Delete Student\n";
+    cout << "  6. Exit\n";
+    cout << "\nEnter your choice: ";
+}</pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Pseudocode and Flowcharts</h2>
+            <div class="section-content">
+                <p>Proper planning and documentation are crucial for successful software development. Here's my approach to algorithm design:</p>
+                
+                <div class="code-snippet">
+                    <pre>ALGORITHM: Binary Search Implementation
+
+INPUT: sorted_array[], target_value, array_size
+OUTPUT: index of target_value or -1 if not found
+
+BEGIN
+    SET left = 0
+    SET right = array_size - 1
+    
+    WHILE left <= right DO
+        SET mid = left + (right - left) / 2
+        
+        IF sorted_array[mid] == target_value THEN
+            RETURN mid
+        ELSE IF sorted_array[mid] < target_value THEN
+            SET left = mid + 1
+        ELSE
+            SET right = mid - 1
+        END IF
+    END WHILE
+    
+    RETURN -1
+END</pre>
+                </div>
+
+                <div class="project-card" style="margin-top: 30px;">
+                    <h3 class="project-title">Design Process</h3>
+                    <p><strong>1. Problem Analysis:</strong> Break down requirements and identify core functionality</p>
+                    <p><strong>2. Algorithm Design:</strong> Create pseudocode and flowcharts to visualize logic flow</p>
+                    <p><strong>3. Implementation:</strong> Translate design into clean, efficient C++ code</p>
+                    <p><strong>4. Testing & Optimization:</strong> Rigorous testing and performance tuning</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Conclusion and Project Impact</h2>
+            <div class="section-content">
+                <p>My portfolio represents a journey of continuous learning and growth in computer science. Each project has challenged me to think critically, solve complex problems, and develop robust software solutions.</p>
+                
+                <div class="grid" style="margin-top: 30px;">
+                    <div class="card">
+                        <h3 class="card-title">Technical Growth</h3>
+                        <p>Mastered fundamental and advanced C++ concepts, data structures, and algorithms through hands-on project development.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Problem-Solving Skills</h3>
+                        <p>Enhanced analytical thinking and debugging capabilities by tackling real-world programming challenges.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title">Future Vision</h3>
+                        <p>Committed to expanding expertise in software architecture, system design, and emerging technologies.</p>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px;">I am passionate about leveraging technology to create meaningful solutions and am excited to contribute to innovative projects that push the boundaries of what's possible in computer science.</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Dione Raze Oro | Bachelor of Science in Computer Science</p>
+            <p style="margin-top: 10px;">Building the future, one line of code at a time.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Photo upload functionality
+        const photoInput = document.getElementById('photoInput');
+        const photoContainer = document.getElementById('photoContainer');
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    photoContainer.innerHTML = `<img src="${event.target.result}" class="profile-photo" alt="Profile Photo">`;
+                    photoContainer.style.border = '4px solid rgba(99, 102, 241, 0.5)';
+                    photoContainer.style.background = 'transparent';
+                    photoContainer.onclick = () => document.getElementById('photoInput').click();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
